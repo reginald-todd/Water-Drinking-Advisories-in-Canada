@@ -3,12 +3,8 @@
 
 --5 YEARS
 
---select * from THESISi.dbo.BC
+--SELECT * FROM THESISi.dbo.BC
 
-USE THESISi
-GO
-CREATE VIEW [BC 5 YEARS]
-AS
 WITH Period1 AS
 (
     SELECT
@@ -35,20 +31,10 @@ SELECT
     P3.[BC 3 Total Years > 5 percentage] - P1.[BC 1 Total Years > 5 percentage] AS 'Difference in Percentage'
 FROM Period1 P1
 JOIN Period3 P3 ON 1 = 1;
-GO
-
-select * 
-from THESISi.dbo.[BC 5 YEARS]
-
 
 
 --10 YEARS
 
-
-USE THESISi
-GO
-CREATE VIEW [BC 10 YEARS]
-AS
 WITH Period1 AS
 (
     SELECT
@@ -76,18 +62,10 @@ SELECT
 FROM Period1 P1
 JOIN Period3 P3 ON 1 = 1;
 
-select * 
-from THESISi.dbo.[BC 10 YEARS]
-
-
 
 --DIFFERENCE IN TOTAL YEARS
 
 
-USE THESISi
-GO
-CREATE VIEW [BC DIFFERENCE IN TOTAL YEARS]
-AS
 WITH Period1 AS
 (
     SELECT
@@ -106,8 +84,3 @@ SELECT
     P1.[BC 1 Total Years] - P3.[BC 3 Total Years] AS 'Difference in Total Years'
 FROM Period1 P1
 CROSS JOIN Period3 P3;
-
-
-
-select * 
-from THESISi.dbo.[BC DIFFERENCE IN TOTAL YEARS]
