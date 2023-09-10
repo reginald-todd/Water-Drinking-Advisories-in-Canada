@@ -1,7 +1,7 @@
 
 2022.01.07
 
-AB i
+--AB i
 
 SELECT * FROM THESISi.dbo.AB
 
@@ -27,7 +27,7 @@ UPDATE THESISi.dbo.AB
 SET TotalYears = DATEDIFF(YEAR,Since,'2022/01/07')
 
 
-BC i
+--BC i
 
 SELECT * FROM THESISi.dbo.BC
 
@@ -53,7 +53,7 @@ UPDATE THESISi.dbo.BC
 SET TotalYears = DATEDIFF(YEAR,since,'2022/01/07')
 
 
-FHA i
+--FHA i
 
 SELECT * FROM THESISi.dbo.FHA
 
@@ -87,12 +87,25 @@ update THESISi.dbo.FHA
 SET TotalYears = DATEDIFF(YEAR,StartDate,'2022/01/07')
 
 
-FNHA i
+--FNHA i
 
 SELECT * FROM THESISi.dbo.FNHA
 
+ALTER TABLE THESISi.dbo.FNHA
+ADD [Total Years] INT
 
-IHA i
+SET QUOTED_IDENTIFIER ON;
+
+UPDATE THESISi.dbo.FNHA
+SET "Total Years" = 
+    CASE 
+        WHEN "Date Revoked Converted" IS NOT NULL 
+        THEN DATEDIFF(YEAR, "Date Set Converted", "Date Revoked Converted")
+        ELSE DATEDIFF(YEAR, "Date Set Converted", '2021-12-31')
+    END;
+
+
+--IHA i
 
 SELECT * FROM THESISi.dbo.IHA
 
@@ -107,7 +120,7 @@ SET TotalYears = DATEDIFF(YEAR,[Advisory Start Date],'2022/01/07')
 WHERE TRY_CONVERT(DATE, [Advisory Start Date]) IS NOT NULL;
 
 
-MB i
+--MB i
 
 SELECT * FROM THESISi.dbo.MB
 
@@ -133,7 +146,7 @@ UPDATE THESISi.dbo.MB
 SET TotalYears = DATEDIFF(YEAR,since,'2022/01/07')
 
 
-VCHA i
+--VCHA i
 
 SELECT * FROM dbo.vcha
 
@@ -147,7 +160,7 @@ ALTER TABLE dbo.vcha
 DROP COLUMN StartDate
 
 
-VIHA i
+--VIHA i
 
 SELECT * FROM THESISi.dbo.viha
 
@@ -155,15 +168,12 @@ ALTER TABLE THESISi.dbo.viha
 DROP COLUMN Today, F2, F5
 
 
-2022.09.28
-
-
-AB ii
+--AB ii
 
 SELECT * FROM THESISii.dbo.AB
 
 
-FHA ii
+--FHA ii
 
 SELECT * FROM THESISii.dbo.FHA
 
@@ -177,7 +187,7 @@ ALTER TABLE THESISii.dbo.FHA
 DROP COLUMN StartDate
 
 
-FNHA ii
+--FNHA ii
 
 SELECT * FROM THESISii.dbo.FNHA
 
@@ -199,23 +209,34 @@ SET DateRevokedConverted = CONVERT(DATE,DateRevoked)
 ALTER TABLE THESISii.dbo.FNHA
 DROP COLUMN DateRevoked
 
+ALTER TABLE THESISii.dbo.FNHA
+ADD [Total Years] INT
 
-IHA ii
+SET QUOTED_IDENTIFIER ON;
+
+UPDATE THESISii.dbo.FNHA
+SET "Total Years" = 
+    CASE 
+        WHEN "Date Revoked" IS NOT NULL 
+        THEN DATEDIFF(YEAR, "Date Set", "Date Revoked")
+        ELSE DATEDIFF(YEAR, "Date Set", '2022-08-31')
+    END;
+
+
+--IHA ii
 
 SELECT * FROM THESISii.dbo.IHA
 
-MB ii
+--MB ii
 
 SELECT * FROM THESISii.dbo.MB
 
-SK ii
+--SK ii
 
 SELECT * FROM THESISii.dbo.SK
 
 
-2023.06.26
-
-AB iii
+--AB iii
 
 SELECT * FROM THESISiii.dbo.AB
 
@@ -241,7 +262,16 @@ UPDATE THESISiii.dbo.AB
 SET TotalYears = DATEDIFF(YEAR,since,'2023/06/26')
 
 
-IHA 3
+--FNHA iii
+
+ALTER TABLE THESISiii.dbo.FNHA
+ADD [Total Years] INT
+
+UPDATE THESISiii.dbo.FNHA
+SET "Total Years" = DATEDIFF(YEAR, "Date Set", '2023-04-30')
+
+
+--IHA iii
 
 SELECT * FROM THESISii.dbo.SK THESISiii.dbo.IHA
 
@@ -262,7 +292,7 @@ SET TotalYears = DATEDIFF(YEAR,StartDate,'2023/06/26')
 WHERE TRY_CONVERT(DATE, StartDate) IS NOT NULL;
 
 
-MB 3
+--MB iii
 
 SELECT * FROM THESISiii.dbo.MB
 
