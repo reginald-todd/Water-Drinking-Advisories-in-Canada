@@ -14,14 +14,11 @@ SET SinceConverted = CONVERT(DATE,Since)
 ALTER TABLE THESISi.dbo.AB
 DROP COLUMN Since
 
-
 ALTER TABLE THESISi.dbo.AB
 ADD TotalDays INT
 
 UPDATE THESISi.dbo.AB
 SET TotalDays = DATEDIFF(DAY,since,'2022/01/07')
-
-
 
 ALTER TABLE THESISi.dbo.AB
 ADD TotalYears INT
@@ -33,7 +30,6 @@ SET TotalYears = DATEDIFF(YEAR,since,'2022/01/07')
 BC i
 
 SELECT * FROM THESISi.dbo.BC
-
 
 ALTER TABLE THESISi.dbo.BC
 ADD SinceConverted DATE;
@@ -91,12 +87,12 @@ update THESISi.dbo.FHA
 SET TotalYears = DATEDIFF(YEAR,StartDate,'2022/01/07')
 
 
-FNHA 1
+FNHA i
 
 SELECT * FROM THESISi.dbo.FNHA
 
 
-IHA 1
+IHA i
 
 SELECT * FROM THESISi.dbo.IHA
 
@@ -111,7 +107,7 @@ SET TotalYears = DATEDIFF(YEAR,[Advisory Start Date],'2022/01/07')
 WHERE TRY_CONVERT(DATE, [Advisory Start Date]) IS NOT NULL;
 
 
-MB 1
+MB i
 
 SELECT * FROM THESISi.dbo.MB
 
