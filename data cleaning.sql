@@ -149,10 +149,16 @@ SET TotalYears = DATEDIFF(YEAR,[Start Date Converted],'2022/01/07')
 SELECT * FROM THESISii.dbo.FHA
 
 ALTER TABLE THESISii.dbo.FHA
-ADD [Start Date Converted] Date;
+ADD [Start Date Converted] DATE;
 
 UPDATE THESISii.dbo.FHA
 SET [Start Date Converted] = CONVERT(DATE,[Start Date])
+
+ALTER TABLE THESISii.dbo.FHA
+ADD TotalYears INT
+
+UPDATE THESISii.dbo.FHA
+SET TotalYears = DATEDIFF(YEAR,[Start Date Converted],'2022/09/28')
 
 
 --FNHA ii
@@ -193,6 +199,12 @@ SELECT * FROM THESISii.dbo.IHA
 
 SELECT * FROM THESISii.dbo.NHA
 
+ALTER TABLE THESISii.dbo.NHA
+ADD TotalYears INT
+
+UPDATE THESISii.dbo.NHA
+SET TotalYears = DATEDIFF(YEAR,[Start Date],'2022/06/30')
+
 --VCHA ii
 
 SELECT * FROM THESISii.dbo.VCHA
@@ -228,6 +240,17 @@ UPDATE THESISiii.dbo.AB
 SET TotalYears = DATEDIFF(YEAR,since,'2023/06/26')
 
 
+--FHA iii
+
+SELECT * FROM THESISiii.dbo.FHA
+
+ALTER TABLE THESISiii.dbo.FHA
+ADD TotalYears INT
+
+UPDATE THESISiii.dbo.FHA
+SET TotalYears = DATEDIFF(YEAR,[Start Date],'2023/09/10')
+
+
 --FNHA iii
 
 ALTER TABLE THESISiii.dbo.FNHA
@@ -258,6 +281,15 @@ SET TotalYears = DATEDIFF(YEAR,StartDate,'2023/06/26')
 WHERE TRY_CONVERT(DATE, StartDate) IS NOT NULL;
 
 
+--NHA iii
+
+ALTER TABLE THESISiii.dbo.NHA
+ADD TotalYears INT
+
+UPDATE THESISiii.dbo.NHA
+SET TotalYears = DATEDIFF(YEAR,[Start Date],'2023/09/10')
+
+
 --MB iii
 
 SELECT * FROM THESISiii.dbo.MB
@@ -282,3 +314,11 @@ ADD TotalYears INT
 
 UPDATE THESISiii.dbo.MB
 SET TotalYears = DATEDIFF(YEAR,since,'2023/06/26')
+
+--VIHA iii
+
+ALTER TABLE THESISiii.dbo.VIHA
+ADD TotalYears INT
+
+UPDATE THESISiii.dbo.VIHA
+SET TotalYears = DATEDIFF(YEAR,[Start Date],'2023/09/11')
