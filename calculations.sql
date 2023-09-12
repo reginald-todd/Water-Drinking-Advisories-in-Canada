@@ -231,14 +231,6 @@ FROM THESISi.dbo.MB;
 
 
 
-
---MB 2
-
-SELECT * FROM THESISii.dbo.MB
-
-
-
-
 --MB 3
 
 SELECT * FROM THESISiii.dbo.MB

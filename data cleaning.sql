@@ -1,6 +1,3 @@
-
-2022.01.07
-
 --AB i
 
 SELECT * FROM THESISi.dbo.AB
@@ -12,19 +9,10 @@ UPDATE THESISi.dbo.AB
 SET SinceConverted = CONVERT(DATE,Since)
 
 ALTER TABLE THESISi.dbo.AB
-DROP COLUMN Since
-
-ALTER TABLE THESISi.dbo.AB
-ADD TotalDays INT
-
-UPDATE THESISi.dbo.AB
-SET TotalDays = DATEDIFF(DAY,Since,'2022/01/07')
-
-ALTER TABLE THESISi.dbo.AB
 ADD TotalYears INT
 
 UPDATE THESISi.dbo.AB
-SET TotalYears = DATEDIFF(YEAR,Since,'2022/01/07')
+SET TotalYears = DATEDIFF(YEAR,SinceConverted,'2022/01/07')
 
 
 --BC i
@@ -38,19 +26,10 @@ UPDATE THESISi.dbo.BC
 SET SinceConverted = CONVERT(DATE,Since)
 
 ALTER TABLE THESISi.dbo.BC
-DROP COLUMN Since
-
-ALTER TABLE THESISi.dbo.BC
-ADD TotalDays INT
-
-UPDATE THESISi.dbo.BC
-SET TotalDays = DATEDIFF(DAY,since,'2022/01/07')
-
-ALTER TABLE THESISi.dbo.BC
 ADD TotalYears INT
 
 UPDATE THESISi.dbo.BC
-SET TotalYears = DATEDIFF(YEAR,since,'2022/01/07')
+SET TotalYears = DATEDIFF(YEAR,SinceConverted,'2022/01/07')
 
 
 --FHA i
@@ -60,31 +39,19 @@ SELECT * FROM THESISi.dbo.FHA
 ALTER TABLE THESISi.dbo.FHA
 DROP COLUMN F2, F3, F5
 
-DELETE FROM THESISi.dbo.FHA WHERE FacilityName IS NULL
+DELETE FROM THESISi.dbo.FHA WHERE [Facility Name] IS NULL
 
 ALTER TABLE THESISi.dbo.FHA
-ADD StartDateConverted DATE;
+ADD [Start Date Converted] DATE;
 
 UPDATE THESISi.dbo.FHA
-SET StartDateConverted = CONVERT(DATE,StartDate)
-
-ALTER TABLE THESISi.dbo.FHA
-DROP column StartDate
-
-ALTER TABLE THESISi.dbo.FHA
-ADD TotalDays INT
-
-UPDATE THESISi.dbo.FHA
-SET TotalDays = DATEDIFF(DAY,StartDate,'2022/01/07')
-
-SELECT StartDate,
-DATEDIFF(DAY,StartDate,'2022/01/07') AS TotalDays FROM THESISi.dbo.FHA
+SET [Start Date Converted] = CONVERT(DATE,[Start Date])
 
 ALTER TABLE THESISi.dbo.FHA
 add TotalYears int
 
 update THESISi.dbo.FHA
-SET TotalYears = DATEDIFF(YEAR,StartDate,'2022/01/07')
+SET TotalYears = DATEDIFF(YEAR,[Start Date Converted],'2022/01/07')
 
 
 --FNHA i
@@ -125,52 +92,56 @@ WHERE TRY_CONVERT(DATE, [Advisory Start Date]) IS NOT NULL;
 SELECT * FROM THESISi.dbo.MB
 
 ALTER TABLE THESISi.dbo.MB
-ADD SinceConverted DATE;
+ADD [Since Converted] DATE;
 
 UPDATE THESISi.dbo.MB
-SET SinceConverted = CONVERT(DATE,Since)
-
-ALTER TABLE THESISi.dbo.MB
-DROP COLUMN Since
-
-ALTER TABLE THESISi.dbo.MB
-ADD TotalDays INT
-
-UPDATE THESISi.dbo.MB
-SET TotalDays = DATEDIFF(DAY,since,'2022/01/07')
+SET [Since Converted] = CONVERT(DATE,Since)
 
 ALTER TABLE THESISi.dbo.MB
 ADD TotalYears INT
 
 UPDATE THESISi.dbo.MB
-SET TotalYears = DATEDIFF(YEAR,since,'2022/01/07')
+SET TotalYears = DATEDIFF(YEAR,[Since Converted],'2022/01/07')
 
 
 --VCHA i
 
-SELECT * FROM dbo.vcha
+SELECT * FROM THESISi.dbo.VCHA
 
-ALTER TABLE dbo.vcha
-ADD StartDateConverted DATE;
+ALTER TABLE THESISi.dbo.VCHA
+DROP COLUMN Today, F8, F9, F10, F11, F12
 
-UPDATE dbo.vcha
-SET StartDateConverted = CONVERT(DATE,StartDate)
+ALTER TABLE THESISi.dbo.VCHA
+ADD [Start Date Converted] DATE;
 
-ALTER TABLE dbo.vcha
-DROP COLUMN StartDate
+UPDATE THESISi.dbo.VCHA
+SET [Start Date Converted] = CONVERT(DATE,[Start Date])
+
+ALTER TABLE THESISi.dbo.VCHA
+ADD TotalYears INT
+
+UPDATE THESISi.dbo.VCHA
+SET TotalYears = DATEDIFF(YEAR,[Start Date Converted],'2022/01/07')
 
 
 --VIHA i
 
-SELECT * FROM THESISi.dbo.viha
+SELECT * FROM THESISi.dbo.VIHA
 
-ALTER TABLE THESISi.dbo.viha
+ALTER TABLE THESISi.dbo.VIHA
 DROP COLUMN Today, F2, F5
 
+ALTER TABLE THESISi.dbo.VIHA
+ADD [Start Date Converted] DATE;
 
---AB ii
+UPDATE THESISi.dbo.VIHA
+SET [Start Date Converted] = CONVERT(DATE,[Start Date])
 
-SELECT * FROM THESISii.dbo.AB
+ALTER TABLE THESISi.dbo.VIHA
+ADD TotalYears INT
+
+UPDATE THESISi.dbo.VIHA
+SET TotalYears = DATEDIFF(YEAR,[Start Date Converted],'2022/01/07')
 
 
 --FHA ii
@@ -178,13 +149,10 @@ SELECT * FROM THESISii.dbo.AB
 SELECT * FROM THESISii.dbo.FHA
 
 ALTER TABLE THESISii.dbo.FHA
-add StartDateConverted Date;
+ADD [Start Date Converted] Date;
 
 UPDATE THESISii.dbo.FHA
-SET StartDateConverted = CONVERT(DATE,StartDate)
-
-ALTER TABLE THESISii.dbo.FHA
-DROP COLUMN StartDate
+SET [Start Date Converted] = CONVERT(DATE,[Start Date])
 
 
 --FNHA ii
@@ -192,22 +160,16 @@ DROP COLUMN StartDate
 SELECT * FROM THESISii.dbo.FNHA
 
 ALTER TABLE THESISii.dbo.FNHA
-ADD DateSetConverted DATE;
+ADD [Date Set Converted] DATE;
 
 UPDATE THESISii.dbo.FNHA
-SET DateSetConverted = CONVERT(DATE,DateSet)
+SET [Date Set Converted] = CONVERT(DATE,[Date Set])
 
 ALTER TABLE THESISii.dbo.FNHA
-DROP COLUMN DateSet
-
-ALTER TABLE THESISii.dbo.FNHA
-ADD DateRevokedConverted DATE;
+ADD [Date Revoked Converted] DATE;
 
 UPDATE THESISii.dbo.FNHA
-SET DateRevokedConverted = CONVERT(DATE,DateRevoked)
-
-ALTER TABLE THESISii.dbo.FNHA
-DROP COLUMN DateRevoked
+SET [Date Revoked Converted] = CONVERT(DATE,[Date_Revoked])
 
 ALTER TABLE THESISii.dbo.FNHA
 ADD [Total Years] INT
@@ -217,9 +179,9 @@ SET QUOTED_IDENTIFIER ON;
 UPDATE THESISii.dbo.FNHA
 SET "Total Years" = 
     CASE 
-        WHEN "Date Revoked" IS NOT NULL 
-        THEN DATEDIFF(YEAR, "Date Set", "Date Revoked")
-        ELSE DATEDIFF(YEAR, "Date Set", '2022-08-31')
+        WHEN [Date Revoked Converted] IS NOT NULL 
+        THEN DATEDIFF(YEAR, [Date Set Converted], [Date Revoked Converted])
+        ELSE DATEDIFF(YEAR, [Date Set Converted], '2022-08-31')
     END;
 
 
@@ -227,13 +189,17 @@ SET "Total Years" =
 
 SELECT * FROM THESISii.dbo.IHA
 
---MB ii
+--NHA ii
 
-SELECT * FROM THESISii.dbo.MB
+SELECT * FROM THESISii.dbo.NHA
 
---SK ii
+--VCHA ii
 
-SELECT * FROM THESISii.dbo.SK
+SELECT * FROM THESISii.dbo.VCHA
+
+--VIHA ii
+
+SELECT * FROM THESISii.dbo.VIHA
 
 
 --AB iii
